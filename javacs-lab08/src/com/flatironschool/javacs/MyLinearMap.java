@@ -1,5 +1,5 @@
 /**
- * 
+ * Solution to previous lab. We're gonna build on this!
  */
 package com.flatironschool.javacs;
 
@@ -95,9 +95,14 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 		return false;
 	}
 
+	// implementing this as a helper function also
 	@Override
 	public Set<Map.Entry<K, V>> entrySet() {
-		throw new UnsupportedOperationException();
+		HashSet<Map.Entry<K, V>> entrySet = new HashSet<Map.Entry<K, V>>();
+		for (Entry e: entries){
+			entrySet.add(e);
+		}
+		return entrySet; // return all the entries
 	}
 
 	@Override

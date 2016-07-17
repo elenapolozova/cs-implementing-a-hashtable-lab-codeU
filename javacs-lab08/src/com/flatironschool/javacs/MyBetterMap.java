@@ -1,5 +1,5 @@
 /**
- * 
+ * Code from "previous readme." We're gonna fill some stuff in!
  */
 package com.flatironschool.javacs;
 
@@ -63,23 +63,40 @@ public class MyBetterMap<K, V> implements Map<K, V> {
 		return maps.get(index);
 	}	
 
+	// use "chooseMap"
 	@Override
 	public boolean containsKey(Object target) {
 		// to find a key, we only have to search one map
         // TODO: fill this in.
-		return false;
+        MyLinearMap<K, V> targetMap = chooseMap(target);
+        return targetMap.containsKey(target);
 	}
 
 	@Override
 	public boolean containsValue(Object target) {
 		// to find a value, we have to search all maps
-        // TODO: fill this in.
-		return false;
+		boolean valueFound = false;
+        for (MyLinearMap<K, V> map: maps){
+        	valueFound = valueFound || map.containsValue(target); // if we wanted to be more efficient, could stop once found
+        }
+		return valueFound;
 	}
 
+	// writing this as a supporting function for rehash
 	@Override
 	public Set<Map.Entry<K, V>> entrySet() {
-		throw new UnsupportedOperationException();
+		HashSet<Map.Entry<K, V>> entrySet = new HashSet<Map.Entry<K,V>>(); // will hold the entries 
+		for (MyLinearMap<K, V> map: maps){
+			for (Map.Entry e: map.entrySet()){
+				entrySet.add(e); // add all elems from each map to new set
+			} // end for
+        } // end for
+        // System.out.print("SET IS NOW: ");
+        // for (Entry e: entrySet){
+        // 	System.out.print(e.getKey() + " -- " +  e.getValue() + " // " );
+        // }
+        // System.out.println();
+		return entrySet;
 	}
 
 	@Override
